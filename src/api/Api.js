@@ -53,18 +53,16 @@ class MovieApi {
 	/** get details on a user by id */
 
 	static async getUser(id) {
-		let res = await this.request(`users/${id}`);
+		let res = await this.request(`users/${id}/info`);
 		return res.user;
 	}
 
 	/** update user data by id */
 
 	static async patchUser(id, data) {
-		let res = await this.request(`users/${id}`, data, 'patch');
+		let res = await this.request(`users/${id}/info`, data, 'patch');
 		return res.user;
 	}
-
-	/** remove user data by  */
 
 	/** post movie_id to movie by user_id and data*/
 
