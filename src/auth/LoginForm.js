@@ -27,8 +27,8 @@ function LoginForm({ login }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let result = await login(formData);
-		if (result.success && currentUser) {
-			history.push(`/user/${currentUser.id}/movies/`);
+		if (result.success) {
+			history.push(`/profile`);
 		} else {
 			setFormErrors(result.errors);
 			console.log(formErrors);

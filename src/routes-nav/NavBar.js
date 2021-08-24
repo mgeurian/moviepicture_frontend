@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './NavBar.css';
-import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
 import UserContext from '../auth/UserContext';
 
 function NavBar({ logout }) {
@@ -12,15 +12,15 @@ function NavBar({ logout }) {
 			<div className="float-right">
 				<Nav className="ml-auto">
 					<NavItem className="mr-4">
-						<NavLink to="/users/:id">Movies</NavLink>
+						<Link to={`/user/${currentUser.id}/movies`}>Movies</Link>
 					</NavItem>
 					<NavItem className="mr-4">
-						<NavLink to="/profile">Profile</NavLink>
+						<Link to="/profile">Profile</Link>
 					</NavItem>
 					<NavItem className="mr-4">
-						<NavLink to="/" onClick={logout}>
+						<Link to="/" onClick={logout}>
 							Log out {currentUser.first_name}
-						</NavLink>
+						</Link>
 					</NavItem>
 				</Nav>
 			</div>
@@ -32,10 +32,10 @@ function NavBar({ logout }) {
 			<div className="float-right">
 				<Nav className="ml-auto">
 					<NavItem className="mr-4">
-						<NavLink to="/login">Login</NavLink>
+						<Link to="/login">Login</Link>
 					</NavItem>
 					<NavItem className="mr-4">
-						<NavLink to="/signup">Sign Up</NavLink>
+						<Link to="/signup">Sign Up</Link>
 					</NavItem>
 				</Nav>
 			</div>
@@ -45,9 +45,9 @@ function NavBar({ logout }) {
 	return (
 		<Navbar className="clearfix" expand="md">
 			<Nav className="ml-auto float-left">
-				<NavLink exact to="/">
+				<Link exact to="/home">
 					MoviePicture
-				</NavLink>
+				</Link>
 			</Nav>
 
 			{currentUser ? loggedInNavBar() : loggedOutNavBar()}
