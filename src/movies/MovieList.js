@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MovieApi from '../api/Api';
-// import SearchForm from '../common/SearchForm';
+import SearchForm from '../common/SearchForm';
 import MovieCard from './MovieCard';
 import LoadingSpinner from '../common/LoadingSpinner';
 
@@ -24,7 +24,7 @@ function MovieList() {
 
 	return (
 		<div className="MovieList container">
-			{/* <SearchForm searchFor={search} /> */}
+			<SearchForm searchFor={search} />
 			{movies && (
 				<div>
 					{movies.map((m) => (
