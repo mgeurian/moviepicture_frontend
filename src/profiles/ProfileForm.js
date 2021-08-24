@@ -47,7 +47,7 @@ function ProfileForm() {
 	}
 
 	return (
-		<div>
+		<div className="container">
 			<form onSubmit={handleSubmit}>
 				<div className="form-group">
 					<label htmlFor="first_name">First Name</label>

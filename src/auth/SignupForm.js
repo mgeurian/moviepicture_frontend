@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
+import './SignupForm.css';
 
 function SignupForm({ signup }) {
 	let history = useHistory();

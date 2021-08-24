@@ -23,9 +23,9 @@ function App() {
 					try {
 						let { id } = jwt.decode(token);
 						MovieApi.token = token;
-						let currentUser = await MovieApi.getUser(id);
+						let res = await MovieApi.getUser(id);
 
-						setCurrentUser(currentUser);
+						setCurrentUser(res);
 					} catch (err) {
 						setCurrentUser(null);
 					}

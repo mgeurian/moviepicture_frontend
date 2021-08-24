@@ -1,9 +1,10 @@
 import React from 'react';
+import './Home.css';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 
 function Home() {
 	return (
-		<section className="col-md-8">
+		<section className="Homepage col-md-8">
 			<Card>
 				<CardBody className="text-center">
 					<CardTitle>

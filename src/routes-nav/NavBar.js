@@ -9,58 +9,49 @@ function NavBar({ logout }) {
 
 	function loggedInNavBar() {
 		return (
-			<div>
-				<Navbar expand="md">
-					<Nav className="navbar-nav ml-auto">
-						<NavItem className="nav-item mr-4">
-							<NavLink className="nav-link" to="/users/:id">
-								Movies
-							</NavLink>
-						</NavItem>
-						<NavItem className="nav-item mr-4">
-							<NavLink className="nav-link" to="/profile">
-								Profile
-							</NavLink>
-						</NavItem>
-						<NavItem className="nav-item mr-4">
-							<NavLink className="nav-link" to="/" onClick={logout}>
-								Log out {currentUser.first_name}
-							</NavLink>
-						</NavItem>
-					</Nav>
-				</Navbar>
+			<div className="float-right">
+				<Nav className="ml-auto">
+					<NavItem className="mr-4">
+						<NavLink to="/users/:id">Movies</NavLink>
+					</NavItem>
+					<NavItem className="mr-4">
+						<NavLink to="/profile">Profile</NavLink>
+					</NavItem>
+					<NavItem className="mr-4">
+						<NavLink to="/" onClick={logout}>
+							Log out {currentUser.first_name}
+						</NavLink>
+					</NavItem>
+				</Nav>
 			</div>
 		);
 	}
 
 	function loggedOutNavBar() {
 		return (
-			<div>
-				<Navbar expand="md">
-					<Nav className="navbar-nav ml-auto">
-						<NavItem className="nav-item mr-4">
-							<NavLink className="nav-link" to="/login">
-								Login
-							</NavLink>
-						</NavItem>
-						<NavItem className="nav-item mr-4">
-							<NavLink className="nav-link" to="/signup">
-								Sign Up
-							</NavLink>
-						</NavItem>
-					</Nav>
-				</Navbar>
+			<div className="float-right">
+				<Nav className="ml-auto">
+					<NavItem className="mr-4">
+						<NavLink to="/login">Login</NavLink>
+					</NavItem>
+					<NavItem className="mr-4">
+						<NavLink to="/signup">Sign Up</NavLink>
+					</NavItem>
+				</Nav>
 			</div>
 		);
 	}
 
 	return (
-		<nav>
-			<NavLink className="float-right" exact to="/">
-				MoviePicture
-			</NavLink>
+		<Navbar className="clearfix" expand="md">
+			<Nav className="ml-auto float-left">
+				<NavLink exact to="/">
+					MoviePicture
+				</NavLink>
+			</Nav>
+
 			{currentUser ? loggedInNavBar() : loggedOutNavBar()}
-		</nav>
+		</Navbar>
 	);
 }
 export default NavBar;

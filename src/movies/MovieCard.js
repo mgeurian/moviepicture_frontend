@@ -1,4 +1,5 @@
 import React from 'react';
+import './MovieCard.css';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
