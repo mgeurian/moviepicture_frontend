@@ -53,35 +53,35 @@ class MovieApi {
 	/** get details on a user by id */
 
 	static async getUser(id) {
-		let res = await this.request(`users/${id}/info`);
-		return res.user;
+		let res = await this.request(`user/${id}/account`);
+		return res.data;
 	}
 
 	/** update user data by id */
 
 	static async patchUser(id, data) {
-		let res = await this.request(`users/${id}/info`, data, 'patch');
+		let res = await this.request(`user/${id}/account`, data, 'patch');
 		return res.user;
 	}
 
 	/** post movie_id to movie by user_id and data*/
 
 	static async postNewMovie(id, data) {
-		await this.request(`users/${id}/movies/add`, data, 'post');
+		await this.request(`user/${id}/movie/add`, data, 'post');
 	}
 
 	static async getMovie(movie_id) {
-		let res = await this.request(`movies/${movie_id}`);
+		let res = await this.request(`movie/${movie_id}`);
 		return res.movie_id;
 	}
 
 	static async getUserMovies(id) {
-		let res = await this.request(`users/${id}/movies`);
-		return res.user;
+		let res = await this.request(`user/${id}/movies/`);
+		return res.data;
 	}
 
 	static async getMovies(id, movie_id) {
-		let res = await this.request(`users/${id}/movies/${movie_id}`, { movie_id });
+		let res = await this.request(`user/${id}/movie/${movie_id}`, { movie_id });
 		return res.movies;
 	}
 }

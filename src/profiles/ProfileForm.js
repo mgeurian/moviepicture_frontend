@@ -1,16 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import MovieApi from '../api/Api';
 import UserContext from '../auth/UserContext';
 
 function ProfileForm() {
-	const { id } = useParams();
-
 	const { currentUser, setCurrentUser } = useContext(UserContext);
 
 	const INITIAL_STATE = {
-		firstName: currentUser.first_name,
-		lastName: currentUser.last_name,
+		first_name: currentUser.first_name,
+		last_name: currentUser.last_name,
 		email: currentUser.email,
 		password: ''
 	};
@@ -30,15 +27,15 @@ function ProfileForm() {
 		e.preventDefault();
 
 		let userData = {
-			firstName: formData.first_name,
-			lastName: formData.last_name,
+			first_name: formData.first_name,
+			last_name: formData.last_name,
 			email: formData.email,
 			password: formData.password
 		};
 
 		let updatedUser;
 		try {
-			updatedUser = await MovieApi.patchUser(id, userData);
+			updatedUser = await MovieApi.patchUser(currentUser.id, userData);
 			console.log(updatedUser);
 		} catch (errors) {
 			setFormErrors(errors);

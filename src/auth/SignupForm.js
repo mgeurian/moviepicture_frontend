@@ -4,7 +4,7 @@ import UserContext from '../auth/UserContext';
 
 function SignupForm({ signup }) {
 	let history = useHistory();
-	const [ currentUser, setCurrentUser ] = useContext(UserContext);
+	const currentUser = useContext(UserContext);
 
 	const INITIAL_STATE = {
 		first_name: '',
@@ -30,7 +30,7 @@ function SignupForm({ signup }) {
 		let result = await signup(formData);
 
 		if (result.success) {
-			history.push(`/users/${currentUser.id}/movies`);
+			history.push(`/user/${currentUser.id}/movies`);
 		} else {
 			setFormErrors(result.errors);
 			console.log(formErrors);

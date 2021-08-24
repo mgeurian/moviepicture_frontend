@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../homepage/Home';
 import SignupForm from '../auth/SignupForm';
 import LoginForm from '../auth/LoginForm';
+import ProfileForm from '../profiles/ProfileForm';
+import MovieList from '../movies/MovieList';
 
 function Routes({ login, signup }) {
 	return (
@@ -18,6 +20,14 @@ function Routes({ login, signup }) {
 
 				<Route exact path="/login">
 					<LoginForm login={login} />
+				</Route>
+
+				<Route exact path="/user/:id/movies">
+					<MovieList />
+				</Route>
+
+				<Route exact path="/profile">
+					<ProfileForm />
 				</Route>
 
 				<Redirect to="/" />

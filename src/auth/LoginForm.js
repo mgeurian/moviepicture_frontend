@@ -4,7 +4,7 @@ import UserContext from '../auth/UserContext';
 
 function LoginForm({ login }) {
 	let history = useHistory();
-	const [ currentUser, setCurrentUser ] = useContext(UserContext);
+	const { currentUser } = useContext(UserContext);
 
 	const INITIAL_STATE = {
 		email: '',
@@ -26,9 +26,8 @@ function LoginForm({ login }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let result = await login(formData);
-
 		if (result.success) {
-			history.push(`/users/${currentUser.id}/movies`);
+			history.push(`/user/${currentUser.id}/movies/all`);
 		} else {
 			setFormErrors(result.errors);
 			console.log(formErrors);

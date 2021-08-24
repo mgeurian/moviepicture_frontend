@@ -13,7 +13,7 @@ function NavBar({ logout }) {
 				<Navbar expand="md">
 					<Nav className="navbar-nav ml-auto">
 						<NavItem className="nav-item mr-4">
-							<NavLink className="nav-link" to="/companies">
+							<NavLink className="nav-link" to="/users/:id">
 								Movies
 							</NavLink>
 						</NavItem>

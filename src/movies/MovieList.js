@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import MovieApi from '../api/Api';
-import SearchBar from '../common/SearchForm';
+// import SearchForm from '../common/SearchForm';
 import MovieCard from './MovieCard';
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 function MovieList() {
 	const [ movies, setMovies ] = useState([]);
 
-	useEffect(function getMoviesOnMount() {
-		search();
-	}, []);
+	useEffect(
+		function getMoviesOnMount() {
+			search();
+			console.log(movies);
+		},
+		[ movies ]
+	);
 
 	async function search(name) {
-		let movies = await MovieApi.getMovies(name);
+		let movies = await MovieApi.getUserMovies(name);
 		setMovies(movies);
 	}
 
@@ -20,10 +24,10 @@ function MovieList() {
 
 	return (
 		<div className="MovieList container">
-			<SearchForm searchFor={search} />
+			{/* <SearchForm searchFor={search} /> */}
 			{movies && (
 				<div>
-					{movies.MovieApi((m) => (
+					{movies.map((m) => (
 						<MovieCard
 							key={m.id}
 							movie_id={m.movie_id}

@@ -17,13 +17,14 @@ function App() {
 	const [ token, setToken ] = useLocalStorage(TOKEN_STORAGE_ID);
 
 	useEffect(
-		function loadUser() {
+		() => {
 			async function getCurrentUser() {
 				if (token) {
 					try {
 						let { id } = jwt.decode(token);
 						MovieApi.token = token;
 						let currentUser = await MovieApi.getUser(id);
+
 						setCurrentUser(currentUser);
 					} catch (err) {
 						setCurrentUser(null);
