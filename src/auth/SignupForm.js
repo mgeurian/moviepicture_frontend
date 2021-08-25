@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import './SignupForm.css';
@@ -18,6 +18,15 @@ function SignupForm({ signup }) {
 
 	const [ formErrors, setFormErrors ] = useState([]);
 
+	useEffect(
+		() => {
+			if (currentUser.id) {
+				history.push(`/user/${currentUser.id}/movies/all`);
+			}
+		},
+		[ currentUser ]
+	);
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((formData) => ({
@@ -30,9 +39,7 @@ function SignupForm({ signup }) {
 		e.preventDefault();
 		let result = await signup(formData);
 
-		if (result.success) {
-			history.push(`/user/${currentUser.id}/movies`);
-		} else {
+		if (!result.success) {
 			setFormErrors(result.errors);
 			console.log(formErrors);
 		}

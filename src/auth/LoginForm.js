@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import './LoginForm.css';
@@ -16,6 +16,15 @@ function LoginForm({ login }) {
 
 	const [ formErrors, setFormErrors ] = useState([]);
 
+	useEffect(
+		() => {
+			if (currentUser.id) {
+				history.push(`/user/${currentUser.id}/movies/all`);
+			}
+		},
+		[ currentUser ]
+	);
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((formData) => ({
@@ -27,9 +36,7 @@ function LoginForm({ login }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let result = await login(formData);
-		if (result.success) {
-			history.push(`/profile`);
-		} else {
+		if (!result.success) {
 			setFormErrors(result.errors);
 			console.log(formErrors);
 		}

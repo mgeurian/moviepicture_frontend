@@ -5,6 +5,7 @@ import SignupForm from '../auth/SignupForm';
 import LoginForm from '../auth/LoginForm';
 import ProfileForm from '../profiles/ProfileForm';
 import MovieList from '../movies/MovieList';
+import MovieDetail from '../movies/MovieDetail';
 
 function Routes({ login, signup }) {
 	return (
@@ -22,7 +23,11 @@ function Routes({ login, signup }) {
 					<LoginForm login={login} />
 				</Route>
 
-				<Route exact path="/user/:id/movies">
+				<Route exact path="/movie/:movie_id">
+					<MovieDetail />
+				</Route>
+
+				<Route exact path="/user/:id/movies/">
 					<MovieList />
 				</Route>
 

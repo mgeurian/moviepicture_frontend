@@ -9,11 +9,12 @@ function MovieDetail() {
 
 	useEffect(
 		() => {
-			async function getMovie() {
-				let res = await MovieApi.getMovie(movie_id);
-				setMovie(res);
+			async function getMovieById(movieId) {
+				let movie = await MovieApi.getMovieById(movieId);
+				setMovie(movie);
+				console.log(movie);
 			}
-			getMovie();
+			getMovieById(movie_id);
 		},
 		[ movie_id ]
 	);
@@ -28,7 +29,10 @@ function MovieDetail() {
 			<p>{movie.imdb_rating}</p>
 			<img src={movie.poster} alt={movie.title} />
 
-			{/* <button className ="btn btn-primary font-weight-bold text-uppercase float-right" onClick={handleView}> {viewed ? "Watched" : "Not Watched"} </button> */}
+			{/* <button className="btn btn-primary font-weight-bold text-uppercase float-right" onClick={handleView}>
+				{' '}
+				{viewed ? 'Watched' : 'Not Watched'}{' '}
+			</button> */}
 		</div>
 	);
 }

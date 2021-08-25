@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar, Nav, NavItem } from 'reactstrap';
 import UserContext from '../auth/UserContext';
 
 function NavBar({ logout }) {
 	const { currentUser } = useContext(UserContext);
 
 	function loggedInNavBar() {
+		const id = currentUser.id;
+
 		return (
 			<div className="float-right">
 				<Nav className="ml-auto">
 					<NavItem className="mr-4">
-						<Link to={`/user/${currentUser.id}/movies`}>Movies</Link>
+						<Link to={`/user/${id}/movies/`}>Movies</Link>
 					</NavItem>
 					<NavItem className="mr-4">
 						<Link to="/profile">Profile</Link>

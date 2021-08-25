@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
 import MovieCard from './MovieCard';
 import LoadingSpinner from '../common/LoadingSpinner';
+import UserContext from '../auth/UserContext';
 
 function MovieList() {
 	const [ movies, setMovies ] = useState([]);
+	const { currentUser } = useContext(UserContext);
+	const id = currentUser.id;
 
 	useEffect(
-		function getMoviesOnMount() {
-			search();
-			console.log(movies);
+		() => {
+			async function getMoviesOnMount(user_id) {
+				try {
+					let movies = await MovieApi.getUserMovies(user_id);
+					setMovies(movies);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+			getMoviesOnMount(id);
 		},
-		[ movies ]
+		[ id ]
 	);
 
 	async function search(name) {

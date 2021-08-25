@@ -5,7 +5,7 @@ import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
 function MovieCard({ movie_id, title, genre, plot, imdb_rating }) {
 	return (
-		<Link to={`movies/${movie_id}`}>
+		<Link to={`/movie/${movie_id}`}>
 			<div>
 				<Card>
 					<CardBody>

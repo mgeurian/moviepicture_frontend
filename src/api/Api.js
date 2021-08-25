@@ -70,19 +70,26 @@ class MovieApi {
 		await this.request(`user/${id}/movie/add`, data, 'post');
 	}
 
-	static async getMovie(movie_id) {
+	static async getMovieById(movie_id) {
 		let res = await this.request(`movie/${movie_id}`);
-		return res.movie_id;
+		return res.data;
+	}
+
+	/** check to make sure this is correct with backend */
+
+	static async getMovieByTitle(movie_title) {
+		let res = await this.request(`movie/${movie_title}`);
+		return res.movie_title;
 	}
 
 	static async getUserMovies(id) {
-		let res = await this.request(`user/${id}/movies/`);
+		let res = await this.request(`user/${id}/movies/all`);
 		return res.data;
 	}
 
 	static async getMovies(id, movie_id) {
 		let res = await this.request(`user/${id}/movie/${movie_id}`, { movie_id });
-		return res.movies;
+		return res.movie;
 	}
 }
 
