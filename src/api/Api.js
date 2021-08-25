@@ -34,7 +34,7 @@ class MovieApi {
 
 	// Individual API routes
 
-	//User Requests
+	// Auth Routes
 
 	/** post a User with data */
 
@@ -50,6 +50,8 @@ class MovieApi {
 		return res.token;
 	}
 
+	// User Routes
+
 	/** get details on a user by id */
 
 	static async getUser(id) {
@@ -61,35 +63,74 @@ class MovieApi {
 
 	static async patchUser(id, data) {
 		let res = await this.request(`user/${id}/account`, data, 'patch');
-		return res.user;
-	}
-
-	/** post movie_id to movie by user_id and data*/
-
-	static async postNewMovie(id, data) {
-		await this.request(`user/${id}/movie/add`, data, 'post');
-	}
-
-	static async getMovieById(movie_id) {
-		let res = await this.request(`movie/${movie_id}`);
 		return res.data;
 	}
+
+	/** post movie to user_movie by user_id and imdbId*/
+	/** also adds movie to db if !movie */
+
+	static async postNewMovie(id, imdbId, data) {
+		await this.request(`user/${id}/movie/${imdbId}/add`, data, 'post');
+	}
+
+	// ********* THE NEXT TWO CALLS MAY BE THE SAME *********
+	// ********* TOO LATE GOING TO BED *********
+	/** get movies by user_id and type */
+
+	static async getUserMoviesByType(id, type) {
+		let res = await this.request(`user/${id}/movies/${type}`);
+		return res.data;
+	}
+
+	/** get user_movies by user_id */
+
+	static async getUserMovies(id) {
+		let res = await this.request(`user/${id}/movies/`);
+		return res.data;
+	}
+
+	/** get user_movie by user_id and movie_id */
+
+	static async getUserMovieById(id, movie_id) {
+		let res = await this.request(`user/${id}/movie/${movie_id}`, { movie_id });
+		return res.data;
+	}
+
+	/** update user_movie by user_id and movie_id */
+
+	static async patchUserMovieByMovieId(id, movie_id) {
+		let res = await this.request(`user/p${id}/movie/${movie_id}/update`);
+		return res.data;
+	}
+
+	/** remove user_movie by user_id and movie_id */
+
+	static async deleteUserMovie(id, movie_id) {
+		let res = await this.request(`user/${id}/movie/${movie_id}`, 'delete');
+		return res.data;
+	}
+
+	/** static async get User by email */
+
+	static async getPublicUserByEmail(userEmail) {
+		let res = await this.request(`search/${userEmail}`);
+		return res.data;
+	}
+
+	/** Movie Routes */
 
 	/** check to make sure this is correct with backend */
 
 	static async getMovieByTitle(movie_title) {
 		let res = await this.request(`movie/${movie_title}`);
-		return res.movie_title;
-	}
-
-	static async getUserMovies(id) {
-		let res = await this.request(`user/${id}/movies/all`);
 		return res.data;
 	}
 
-	static async getMovies(id, movie_id) {
-		let res = await this.request(`user/${id}/movie/${movie_id}`, { movie_id });
-		return res.movie;
+	/** get movie by movie_id */
+
+	static async getMovieById(movie_id) {
+		let res = await this.request(`movie/${movie_id}`);
+		return res.data;
 	}
 }
 
