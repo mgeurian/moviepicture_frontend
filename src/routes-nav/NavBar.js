@@ -14,7 +14,7 @@ function NavBar({ logout }) {
 			<div className="float-right">
 				<Nav className="ml-auto">
 					<NavItem className="mr-4">
-						<Link to={`/user/${id}/movies/`}>Movies</Link>
+						<Link to={`/user/${id}/movies/all`}>Movies</Link>
 					</NavItem>
 					<NavItem className="mr-4">
 						<Link to="/profile">Profile</Link>
@@ -45,7 +45,7 @@ function NavBar({ logout }) {
 	}
 
 	return (
-		<Navbar className="clearfix" expand="md">
+		<Navbar className="clearfix container" expand="md">
 			<Nav className="ml-auto float-left">
 				<Link exact to="/home">
 					MoviePicture

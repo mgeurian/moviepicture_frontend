@@ -1,0 +1,16 @@
+.flex-container {
+  display: flex;
+  align-self: center;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+
+.flex-item {
+  width: 250px;
+  height: 500px;
+  text-align: center;
+}
+
+.button {
+  margin: 5px;
+}

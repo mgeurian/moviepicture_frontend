@@ -3,17 +3,16 @@ import './SearchForm.css';
 
 function SearchForm({ searchFor }) {
 	const [ searchTerm, setSearchTerm ] = useState('');
+
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(searchTerm);
-		searchFor(searchTerm.trim() || undefined);
+		searchFor(searchTerm.trim());
 		setSearchTerm(searchTerm.trim());
 	}
 
 	function handleChange(e) {
 		const { value } = e.target;
 		setSearchTerm(value);
-		console.log(e.target.value);
 	}
 
 	return (
@@ -21,6 +20,7 @@ function SearchForm({ searchFor }) {
 			<form className="form-inline input-group" onSubmit={handleSubmit}>
 				<input
 					className="form-control"
+					type="search"
 					name="searchTerm"
 					placeholder="Enter search term..."
 					value={searchTerm}

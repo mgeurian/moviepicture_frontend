@@ -70,22 +70,28 @@ class MovieApi {
 	/** also adds movie to db if !movie */
 
 	static async postNewMovie(id, imdbId, data) {
-		await this.request(`user/${id}/movie/${imdbId}/add`, data, 'post');
+		let res = await this.request(`user/${id}/movie/${imdbId}/add`, data, 'post');
+		return res.data;
 	}
 
 	// ********* THE NEXT TWO CALLS MAY BE THE SAME *********
 	// ********* TOO LATE GOING TO BED *********
 	/** get movies by user_id and type */
 
-	static async getUserMoviesByType(id, type) {
-		let res = await this.request(`user/${id}/movies/${type}`);
-		return res.data;
-	}
+	// static async getUserMoviesByType(id, type) {
+	// 	let res = await this.request(`user/${id}/movies/${type}`);
+	// 	return res.data;
+	// }
 
 	/** get user_movies by user_id */
 
+	// static async getUserMovies(id) {
+	// 	let res = await this.request(`user/${id}/movies/all`);
+	// 	return res.data;
+	// }
+
 	static async getUserMovies(id) {
-		let res = await this.request(`user/${id}/movies/`);
+		let res = await this.request(`user/${id}/movies/all`);
 		return res.data;
 	}
 
@@ -99,7 +105,7 @@ class MovieApi {
 	/** update user_movie by user_id and movie_id */
 
 	static async patchUserMovieByMovieId(id, movie_id) {
-		let res = await this.request(`user/p${id}/movie/${movie_id}/update`);
+		let res = await this.request(`user/p${id}/movie/${movie_id}/update`, { movie_id }, 'patch');
 		return res.data;
 	}
 
@@ -122,7 +128,7 @@ class MovieApi {
 	/** check to make sure this is correct with backend */
 
 	static async getMovieByTitle(movie_title) {
-		let res = await this.request(`movie/${movie_title}`);
+		let res = await this.request(`movie/search?q=${movie_title}`);
 		return res.data;
 	}
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieApi from '../api/Api';
+import useFlipState from '../hooks/useFlipState';
 
 function MovieDetail() {
 	const { movie_id } = useParams();
 
 	const [ movie, setMovie ] = useState([]);
+
+	const [ view, flipView ] = useFlipState();
 
 	useEffect(
 		() => {
@@ -19,6 +22,13 @@ function MovieDetail() {
 		[ movie_id ]
 	);
 
+	// this needs to update the viewed property of user_movie in the database
+	// now, it only changes the text in the element, it does not update the db
+
+	// async function handleView(){
+
+	// }
+
 	return (
 		<div className="MovieDetail col-md-8 offset-md-2">
 			<h2>{movie.title}</h2>
@@ -29,10 +39,10 @@ function MovieDetail() {
 			<p>{movie.imdb_rating}</p>
 			<img src={movie.poster} alt={movie.title} />
 
-			{/* <button className="btn btn-primary font-weight-bold text-uppercase float-right" onClick={handleView}>
+			<button className="btn btn-primary font-weight-bold text-uppercase float-right" onClick={flipView}>
 				{' '}
-				{viewed ? 'Watched' : 'Not Watched'}{' '}
-			</button> */}
+				{view ? 'Seen' : 'Not Seen'}{' '}
+			</button>
 		</div>
 	);
 }

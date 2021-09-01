@@ -63,6 +63,12 @@ function App() {
 		}
 	}
 
+	// async function remove(movieId) {
+	// 	try {
+
+	// 	}
+	// }
+
 	if (!infoLoaded) return <LoadingSpinner />;
 
 	return (

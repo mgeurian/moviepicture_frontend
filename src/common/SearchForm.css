@@ -1,5 +1,13 @@
 .SearchForm input:focus {
   box-shadow: none;
   border-color: #ced4da;
+}
+
+.form-parent {
+  margin-top: 1rem;
+}
+
+form {
+  margin: 1rem;
   width: 50%;
 }

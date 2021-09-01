@@ -20,11 +20,11 @@ function SignupForm({ signup }) {
 
 	useEffect(
 		() => {
-			if (currentUser) {
+			if (currentUser?.id) {
 				history.push(`/user/${currentUser.id}/movies/all`);
 			}
 		},
-		[ currentUser ]
+		[ currentUser.id ]
 	);
 
 	const handleChange = (e) => {
