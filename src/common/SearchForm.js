@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import './SearchForm.css';
 
 function SearchForm({ searchFor }) {
 	const [ searchTerm, setSearchTerm ] = useState('');
+	// const history = useHistory();
 
 	function handleSubmit(e) {
 		e.preventDefault();

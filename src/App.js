@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useHistory } from 'react-router-dom';
 import './App.css';
 import Routes from './routes-nav/Routes';
 import NavBar from './routes-nav/NavBar';
@@ -15,6 +15,7 @@ function App() {
 	const [ infoLoaded, setInfoLoaded ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState(null);
 	const [ token, setToken ] = useLocalStorage(TOKEN_STORAGE_ID);
+	const history = useHistory();
 
 	useEffect(
 		() => {
@@ -37,6 +38,27 @@ function App() {
 		},
 		[ token ]
 	);
+
+	async function addMovie(id, imdb_id) {
+		try {
+			let res = await MovieApi.postNewMovie(id, imdb_id);
+			console.log(res);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	async function removeMovie(id, movie_id) {
+		const userId = id;
+		try {
+			console.log(userId, movie_id);
+			const res = await MovieApi.deleteUserMovie(userId, movie_id);
+			console.log(res);
+			history.push(`user/:userId/movies/all`);
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	async function login(loginData) {
 		try {
@@ -63,17 +85,11 @@ function App() {
 		}
 	}
 
-	// async function remove(movieId) {
-	// 	try {
-
-	// 	}
-	// }
-
 	if (!infoLoaded) return <LoadingSpinner />;
 
 	return (
 		<BrowserRouter>
-			<UserContext.Provider value={{ currentUser, setCurrentUser }}>
+			<UserContext.Provider value={{ currentUser, setCurrentUser, addMovie, removeMovie }}>
 				<div className="App">
 					<NavBar logout={logout} />
 					<Routes login={login} signup={signup} />

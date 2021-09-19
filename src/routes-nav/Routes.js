@@ -31,14 +31,6 @@ function Routes({ login, signup }) {
 					<MovieList />
 				</Route>
 
-				{/* <Route exact path="/user/:id/movies/notViewed">
-					<MovieList />
-				</Route>
-
-				<Route exact path="/user/:id/movies/viewed">
-					<MovieList />
-				</Route> */}
-
 				<Route exact path="/profile">
 					<ProfileForm />
 				</Route>

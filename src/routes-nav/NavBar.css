@@ -38,3 +38,12 @@ nav a:not(.navbar-brand):hover {
   font-weight: bold;
 }
 
+float-left {
+  float: left;
+  margin-right: auto;
+}
+
+float-right {
+  float: right;
+  margin-left: auto;
+}

@@ -6,6 +6,7 @@ import './SignupForm.css';
 function SignupForm({ signup }) {
 	let history = useHistory();
 	const currentUser = useContext(UserContext);
+	let id = currentUser.id;
 
 	const INITIAL_STATE = {
 		first_name: '',
@@ -20,11 +21,12 @@ function SignupForm({ signup }) {
 
 	useEffect(
 		() => {
-			if (currentUser?.id) {
-				history.push(`/user/${currentUser.id}/movies/all`);
+			if (id) {
+				console.log(id);
+				history.push(`/user/${id}/movies/all`);
 			}
 		},
-		[ currentUser.id ]
+		[ id, history ]
 	);
 
 	const handleChange = (e) => {
@@ -38,7 +40,6 @@ function SignupForm({ signup }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let result = await signup(formData);
-
 		if (!result.success) {
 			setFormErrors(result.errors);
 			console.log(formErrors);

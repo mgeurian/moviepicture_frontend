@@ -18,11 +18,11 @@ function LoginForm({ login }) {
 
 	useEffect(
 		() => {
-			if (currentUser) {
+			if (currentUser?.id) {
 				history.push(`/user/${currentUser.id}/movies/all`);
 			}
 		},
-		[ currentUser ]
+		[ currentUser, history ]
 	);
 
 	const handleChange = (e) => {

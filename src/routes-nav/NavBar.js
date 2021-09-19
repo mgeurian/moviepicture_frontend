@@ -1,59 +1,63 @@
-import React, { useContext } from 'react';
-import './NavBar.css';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'reactstrap';
+import './NavBar.css';
+import { Navbar, NavbarToggler, Nav, NavItem, NavbarBrand, Collapse } from 'reactstrap';
 import UserContext from '../auth/UserContext';
 
 function NavBar({ logout }) {
 	const { currentUser } = useContext(UserContext);
 
+	const [ isOpen, setIsOpen ] = useState(false);
+
+	const toggle = () => setIsOpen(!isOpen);
+
 	function loggedInNavBar() {
 		const id = currentUser.id;
 
 		return (
-			<div className="float-right">
-				<Nav className="ml-auto">
-					<NavItem className="mr-4">
-						<Link to={`/user/${id}/movies/all`}>Movies</Link>
-					</NavItem>
-					<NavItem className="mr-4">
-						<Link to="/profile">Profile</Link>
-					</NavItem>
-					<NavItem className="mr-4">
-						<Link to="/" onClick={logout}>
-							Log out {currentUser.first_name}
-						</Link>
-					</NavItem>
-				</Nav>
-			</div>
+			<Nav className="mr-auto navbar">
+				<NavItem className="mr-2">
+					<Link to={`/user/${id}/movies/all`}>Movies</Link>
+				</NavItem>
+				<NavItem className="mr-2">
+					<Link to="/profile">Profile</Link>
+				</NavItem>
+				<NavItem className="mr-2">
+					<Link to="/" onClick={logout}>
+						Log out {currentUser.first_name}
+					</Link>
+				</NavItem>
+			</Nav>
 		);
 	}
 
 	function loggedOutNavBar() {
 		return (
-			<div className="float-right">
-				<Nav className="ml-auto">
-					<NavItem className="mr-4">
-						<Link to="/login">Login</Link>
-					</NavItem>
-					<NavItem className="mr-4">
-						<Link to="/signup">Sign Up</Link>
-					</NavItem>
-				</Nav>
-			</div>
+			<Nav className="mr-auto navbar">
+				<NavItem className="mr-2">
+					<Link to="/login">Login</Link>
+				</NavItem>
+				<NavItem className="mr-2">
+					<Link to="/signup">Sign Up</Link>
+				</NavItem>
+			</Nav>
 		);
 	}
 
 	return (
-		<Navbar className="clearfix container" expand="md">
-			<Nav className="ml-auto float-left">
-				<Link exact to="/home">
-					MoviePicture
-				</Link>
-			</Nav>
-
-			{currentUser ? loggedInNavBar() : loggedOutNavBar()}
-		</Navbar>
+		<div>
+			<Navbar color="light" light expand="md">
+				<NavbarBrand>
+					<Link exact to="/home">
+						MoviePicture
+					</Link>
+				</NavbarBrand>
+				<NavbarToggler onClick={toggle} />
+				<Collapse isOpen={isOpen} navbar>
+					{currentUser ? loggedInNavBar() : loggedOutNavBar()}
+				</Collapse>
+			</Navbar>
+		</div>
 	);
 }
 export default NavBar;

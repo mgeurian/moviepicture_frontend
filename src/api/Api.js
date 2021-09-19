@@ -74,26 +74,18 @@ class MovieApi {
 		return res.data;
 	}
 
-	// ********* THE NEXT TWO CALLS MAY BE THE SAME *********
-	// ********* TOO LATE GOING TO BED *********
-	/** get movies by user_id and type */
-
-	// static async getUserMoviesByType(id, type) {
-	// 	let res = await this.request(`user/${id}/movies/${type}`);
-	// 	return res.data;
-	// }
+	static async getUserMovies(id, page = 1) {
+		console.log(id, page);
+		let res = await this.request(`user/${id}/movies/all?page=${page}`);
+		return res.data;
+	}
 
 	/** get user_movies by user_id */
 
-	// static async getUserMovies(id) {
+	// static async getUserMovies(id, page, type = 'all') {
 	// 	let res = await this.request(`user/${id}/movies/all`);
 	// 	return res.data;
 	// }
-
-	static async getUserMovies(id) {
-		let res = await this.request(`user/${id}/movies/all`);
-		return res.data;
-	}
 
 	/** get user_movie by user_id and movie_id */
 
@@ -112,7 +104,7 @@ class MovieApi {
 	/** remove user_movie by user_id and movie_id */
 
 	static async deleteUserMovie(id, movie_id) {
-		let res = await this.request(`user/${id}/movie/${movie_id}`, 'delete');
+		let res = await this.request(`user/${id}/movie/${movie_id}`, { movie_id }, 'delete');
 		return res.data;
 	}
 
@@ -138,6 +130,10 @@ class MovieApi {
 		let res = await this.request(`movie/${movie_id}`);
 		return res.data;
 	}
+
+	// static async getViewByImdb(user_id, imdb_id) {
+	// 	let res = await this.request(`movie/search`);
+	// }
 }
 
 export default MovieApi;
