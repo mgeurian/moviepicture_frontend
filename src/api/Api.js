@@ -74,18 +74,11 @@ class MovieApi {
 		return res.data;
 	}
 
-	static async getUserMovies(id, page = 1) {
-		console.log(id, page);
-		let res = await this.request(`user/${id}/movies/all?page=${page}`);
-		return res.data;
+	static async getUserMovies(id, page, type = 'all') {
+		console.log(id, type);
+		let res = await this.request(`user/${id}/movies/${type}`, { page });
+		return res;
 	}
-
-	/** get user_movies by user_id */
-
-	// static async getUserMovies(id, page, type = 'all') {
-	// 	let res = await this.request(`user/${id}/movies/all`);
-	// 	return res.data;
-	// }
 
 	/** get user_movie by user_id and movie_id */
 
