@@ -17,7 +17,7 @@ function NavBar({ logout }) {
 		return (
 			<Nav className="mr-auto navbar">
 				<NavItem className="mr-2">
-					<Link to={`/user/${id}/movies/all`}>Movies</Link>
+					<Link to={`/user/${id}/movies/all`}>My Movies</Link>
 				</NavItem>
 				<NavItem className="mr-2">
 					<Link to="/profile">Profile</Link>

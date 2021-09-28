@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+import NavBar from './NavBar';
 
 test('renders without crashing', () => {
-	render(<App />);
+	render(<NavBar />);
 });

@@ -75,7 +75,6 @@ class MovieApi {
 	}
 
 	static async getUserMovies(id, page, type = 'all') {
-		console.log(id, type);
 		let res = await this.request(`user/${id}/movies/${type}`, { page });
 		return res;
 	}
@@ -112,8 +111,10 @@ class MovieApi {
 
 	/** check to make sure this is correct with backend */
 
-	static async getMovieByTitle(movie_title) {
-		let res = await this.request(`movie/search?q=${movie_title}`);
+	static async getMovieByTitle(data) {
+		console.log(data);
+		let res = await this.request(`movie/search`, data);
+		console.log('here is the backend response: ', res.data);
 		return res.data;
 	}
 

@@ -27,6 +27,10 @@ function Routes({ login, signup }) {
 					<MovieDetail />
 				</Route>
 
+				<Route exact path="/movie/search">
+					<MovieList />
+				</Route>
+
 				<Route exact path="/user/:id/movies/all">
 					<MovieList />
 				</Route>
