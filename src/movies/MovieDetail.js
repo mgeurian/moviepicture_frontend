@@ -1,23 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import MovieApi from '../api/Api';
 
-function MovieDetail() {
-	const { movie_id } = useParams();
+// if movie_id does not follow this pattern 'tt1234567', then it is in our moviepicture_db.
+// It should display a remove
 
+function MovieDetail({}) {
+	const { movie_id } = useParams();
 	const [ movie, setMovie ] = useState([]);
+
+	// const location = useLocation();
+	// const { movieData } = location.state;
+	// console.log('this is moviedetail moviedata: ', movieData);
+
+	function isInt(value) {
+		var x = parseFloat(value);
+		return !isNaN(value) && (x | 0) === x;
+	}
+
+	// if (isInt(movie_id)) {
+	// 	getMovieById(movie_id);
+	// } else {
+	// 	getMovieFromOmdb(movie_id);
+	// }
 
 	useEffect(
 		() => {
-			async function getMovieById(movieId) {
-				let movie = await MovieApi.getMovieById(movieId);
-				setMovie(movie);
-				console.log(movie);
+			async function getMoviesOnMount(movie_id) {
+				try {
+					if (isInt(movie_id)) {
+						let movie = await MovieApi.getMovieById(movie_id);
+						console.log('from movieDetail: ', movie);
+						setMovie(movie);
+					} else {
+						let movie = await MovieApi.getMovieFromOmdb(movie_id);
+						console.log(movie);
+						setMovie(movie);
+					}
+				} catch (err) {
+					console.log(err);
+				}
 			}
-			getMovieById(movie_id);
+			getMoviesOnMount(movie_id);
 		},
 		[ movie_id ]
 	);
+
+	// async function getMovieFromOmdb(movieId) {
+	// 	let movie = await MovieApi.getMovieFromOmdb(movieId);
+	// 	setMovie(movie);
+	// 	console.log(movie);
+	// }
+
+	// async function getMovieById(movieId) {
+	// 	let movie = await MovieApi.getMovieById(movieId);
+	// 	setMovie(movie);
+	// 	console.log(movie);
+	// }
 
 	return (
 		<div className="MovieDetail col-md-8 offset-md-2">

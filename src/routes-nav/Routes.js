@@ -6,6 +6,7 @@ import LoginForm from '../auth/LoginForm';
 import ProfileForm from '../profiles/ProfileForm';
 import MovieList from '../movies/MovieList';
 import MovieDetail from '../movies/MovieDetail';
+// import SearchDetail from '../common/SearchDetail';
 
 function Routes({ login, signup }) {
 	return (
@@ -24,6 +25,10 @@ function Routes({ login, signup }) {
 				</Route>
 
 				<Route exact path="/movie/:movie_id">
+					<MovieDetail />
+				</Route>
+
+				<Route exact path="/movie/id/:movie_id">
 					<MovieDetail />
 				</Route>
 

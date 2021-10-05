@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, useHistory } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Routes from './routes-nav/Routes';
 import NavBar from './routes-nav/NavBar';
@@ -15,7 +15,6 @@ function App() {
 	const [ infoLoaded, setInfoLoaded ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState(null);
 	const [ token, setToken ] = useLocalStorage(TOKEN_STORAGE_ID);
-	const history = useHistory();
 
 	useEffect(
 		() => {
@@ -48,13 +47,10 @@ function App() {
 		}
 	}
 
-	async function removeMovie(id, movie_id) {
-		const userId = id;
+	async function removeMovie(userId, movie_id) {
 		try {
-			console.log(userId, movie_id);
-			const res = await MovieApi.deleteUserMovie(userId, movie_id);
+			let res = await MovieApi.deleteUserMovie(userId, movie_id);
 			console.log(res);
-			history.push(`user/:userId/movies/all`);
 		} catch (err) {
 			console.log(err);
 		}

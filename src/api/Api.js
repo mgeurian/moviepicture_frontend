@@ -74,6 +74,8 @@ class MovieApi {
 		return res.data;
 	}
 
+	/** gets all of a users movies, 10 movies at a time, which 10 depends on the page number passed into the function */
+
 	static async getUserMovies(id, page, type = 'all') {
 		let res = await this.request(`user/${id}/movies/${type}`, { page });
 		return res;
@@ -109,14 +111,10 @@ class MovieApi {
 
 	/** Movie Routes */
 
-	/** check to make sure this is correct with backend */
-
 	////change the variable name to be the same as the query parameter expected on the backend, in this case is "q"
 	////I added also the pagination example
 	static async getMovieByTitle(q, page = 1) {
-		console.log('this is getMovieByTitle in api.js: ', q);
 		let res = await this.request(`movie/search`, { q, page });
-		console.log('here is the backend response: ', res.data);
 		return res.data;
 	}
 
@@ -127,9 +125,10 @@ class MovieApi {
 		return res.data;
 	}
 
-	// static async getViewByImdb(user_id, imdb_id) {
-	// 	let res = await this.request(`movie/search`);
-	// }
+	static async getMovieFromOmdb(movie_id) {
+		let res = await this.request(`movie/id/${movie_id}`);
+		return res.data;
+	}
 }
 
 export default MovieApi;
