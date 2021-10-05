@@ -35,6 +35,7 @@ function MovieDetail({}) {
 					} else {
 						let movie = await MovieApi.getMovieFromOmdb(movie_id);
 						console.log(movie);
+						console.log(movie.Title);
 						setMovie(movie);
 					}
 				} catch (err) {
@@ -60,13 +61,13 @@ function MovieDetail({}) {
 
 	return (
 		<div className="MovieDetail col-md-8 offset-md-2">
-			<h2>{movie.title}</h2>
-			<p>{movie.year}</p>
-			<p>{movie.genre}</p>
-			<p>{movie.plot}</p>
-			<p>{movie.director}</p>
-			<p>{movie.imdb_rating}</p>
-			<img src={movie.poster} alt={movie.title} />
+			<h2>{movie.title || movie.Title}</h2>
+			<p>{movie.year || movie.Year}</p>
+			<p>{movie.genre || movie.Genre}</p>
+			<p>{movie.plot || movie.Plot}</p>
+			<p>{movie.director || movie.Director}</p>
+			<p>{movie.imdb_rating || movie.imdbRating}</p>
+			<img src={movie.poster || movie.Poster} alt={movie.title || movie.Title} />
 		</div>
 	);
 }
