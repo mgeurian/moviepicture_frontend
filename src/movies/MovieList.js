@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
@@ -20,7 +20,7 @@ function MovieList() {
 	const [ moviesPerPage ] = useState(10);
 	const [ moviesLength, setMoviesLength ] = useState(null);
 
-	const history = useHistory();
+	// const history = useHistory();
 	const { id, type } = useParams();
 
 	//this useEffect generates a user's movieList and all subsequent records for pages within.

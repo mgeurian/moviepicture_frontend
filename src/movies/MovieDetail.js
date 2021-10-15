@@ -50,14 +50,14 @@ function MovieDetail() {
 
 	useEffect(
 		() => {
-			async function getMoviesOnMount(movie_id) {
+			async function getMoviesOnMount(movie_id, userId) {
 				try {
 					if (isInt(movie_id)) {
 						let movie = await MovieApi.getMovieById(movie_id);
 						console.log('from movieDetail: ', movie);
 						setMovie(movie);
 					} else {
-						let movie = await MovieApi.getMovieFromOmdb(movie_id);
+						let movie = await MovieApi.getMovieFromOmdb(movie_id, userId);
 						console.log(movie);
 						console.log(movie.Title);
 						setMovie(movie);
@@ -66,7 +66,7 @@ function MovieDetail() {
 					console.log(err);
 				}
 			}
-			getMoviesOnMount(movie_id);
+			getMoviesOnMount(movie_id, user_id);
 		},
 		[ movie_id ]
 	);

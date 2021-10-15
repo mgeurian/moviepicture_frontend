@@ -5,7 +5,6 @@ import SignupForm from '../auth/SignupForm';
 import LoginForm from '../auth/LoginForm';
 import ProfileForm from '../profiles/ProfileForm';
 import MovieList from '../movies/MovieList';
-// import SearchList from '../common/SearchList';
 import MovieDetail from '../movies/MovieDetail';
 
 function Routes({ login, signup }) {
