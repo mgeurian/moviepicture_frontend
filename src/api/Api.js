@@ -111,8 +111,6 @@ class MovieApi {
 
 	/** Movie Routes */
 
-	////change the variable name to be the same as the query parameter expected on the backend, in this case is "q"
-	////I added also the pagination example
 	static async getMovieByTitle(q, page = 1) {
 		let res = await this.request(`movie/search`, { q, page });
 		return res.data;
@@ -125,8 +123,10 @@ class MovieApi {
 		return res.data;
 	}
 
-	static async getMovieFromOmdb(movie_id) {
-		let res = await this.request(`movie/id/${movie_id}`);
+	/** get movie from omdb by movie_id(imdbId) */
+
+	static async getMovieFromOmdb(movie_id, user_id) {
+		let res = await this.request(`movie/id/${movie_id}`, { user_id });
 		return res.data;
 	}
 }

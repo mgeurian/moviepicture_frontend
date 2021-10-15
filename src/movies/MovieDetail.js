@@ -1,28 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import MovieApi from '../api/Api';
+import UserContext from '../auth/UserContext';
+import { Button } from 'reactstrap';
+import './MovieDetail.css';
 
-// if movie_id does not follow this pattern 'tt1234567', then it is in our moviepicture_db.
-// It should display a remove
+function MovieDetail() {
+	const { currentUser, addMovie, removeMovie } = useContext(UserContext);
 
-function MovieDetail({}) {
 	const { movie_id } = useParams();
 	const [ movie, setMovie ] = useState([]);
-
-	// const location = useLocation();
-	// const { movieData } = location.state;
-	// console.log('this is moviedetail moviedata: ', movieData);
+	const user_id = currentUser.id;
+	let imdb_id;
 
 	function isInt(value) {
 		var x = parseFloat(value);
 		return !isNaN(value) && (x | 0) === x;
 	}
 
-	// if (isInt(movie_id)) {
-	// 	getMovieById(movie_id);
-	// } else {
-	// 	getMovieFromOmdb(movie_id);
-	// }
+	async function handleAdd(e) {
+		e.preventDefault();
+		if (!isInt(movie_id)) {
+			let imdb_id = movie_id;
+			return imdb_id;
+		}
+		await addMovie(user_id, imdb_id);
+	}
+
+	async function handleRemove(e) {
+		e.preventDefault();
+		await removeMovie(user_id, movie_id);
+	}
+
+	function addButton() {
+		return (
+			<Button className="MovieCard-Button" onClick={handleAdd} color="success">
+				Add
+			</Button>
+		);
+	}
+
+	function removeButton() {
+		return (
+			<Button className="MovieCard-Button" onClick={handleRemove} color="danger">
+				Remove
+			</Button>
+		);
+	}
 
 	useEffect(
 		() => {
@@ -61,13 +85,16 @@ function MovieDetail({}) {
 
 	return (
 		<div className="MovieDetail col-md-8 offset-md-2">
-			<h2>{movie.title || movie.Title}</h2>
-			<p>{movie.year || movie.Year}</p>
-			<p>{movie.genre || movie.Genre}</p>
-			<p>{movie.plot || movie.Plot}</p>
-			<p>{movie.director || movie.Director}</p>
-			<p>{movie.imdb_rating || movie.imdbRating}</p>
-			<img src={movie.poster || movie.Poster} alt={movie.title || movie.Title} />
+			<div>
+				<h2>{movie.title || movie.Title}</h2>
+				<p>{movie.year || movie.Year}</p>
+				<p>{movie.genre || movie.Genre}</p>
+				<p>{movie.plot || movie.Plot}</p>
+				<p>{movie.director || movie.Director}</p>
+				<p>{movie.imdb_rating || movie.imdbRating}</p>
+				<img src={movie.poster || movie.Poster} alt={movie.title || movie.Title} />
+				{/* {viewed ? removeButton() : addButton()} */}
+			</div>
 		</div>
 	);
 }

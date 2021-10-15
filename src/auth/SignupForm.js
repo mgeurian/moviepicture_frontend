@@ -5,8 +5,8 @@ import './SignupForm.css';
 
 function SignupForm({ signup }) {
 	let history = useHistory();
-	const currentUser = useContext(UserContext);
-	let id = currentUser.id;
+	const { currentUser } = useContext(UserContext);
+	// let id = currentUser.id;
 
 	const INITIAL_STATE = {
 		first_name: '',
@@ -21,12 +21,12 @@ function SignupForm({ signup }) {
 
 	useEffect(
 		() => {
-			if (id) {
-				console.log(id);
-				history.push(`/user/${id}/movies/all`);
+			if (currentUser) {
+				// console.log();
+				history.push(`/user/${currentUser.id}/movies/all`);
 			}
 		},
-		[ id, history ]
+		[ currentUser, history ]
 	);
 
 	const handleChange = (e) => {

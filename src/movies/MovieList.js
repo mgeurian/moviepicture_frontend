@@ -20,7 +20,7 @@ function MovieList() {
 	const [ moviesPerPage ] = useState(10);
 	const [ moviesLength, setMoviesLength ] = useState(null);
 
-	// const history = useHistory();
+	const history = useHistory();
 	const { id, type } = useParams();
 
 	//this useEffect generates a user's movieList and all subsequent records for pages within.
@@ -31,6 +31,7 @@ function MovieList() {
 					if (!currentFilter) {
 						let res = await MovieApi.getUserMovies(user_id, pageNum, viewType);
 						setMovies(res.Search);
+						console.log(res.Search);
 						setNumberOfMovies(res.totalResults.count);
 						setMoviesLength(res.Search.length);
 					} else {
@@ -52,7 +53,7 @@ function MovieList() {
 		setCurrentFilter(name);
 		setMovies(movies);
 		setNumberOfMovies(totalResults);
-		// history.push(`/movie/search`);
+		// history.push(`/movie/search?q=${name}`);
 	}
 
 	const paginate = (pageNumber) => {

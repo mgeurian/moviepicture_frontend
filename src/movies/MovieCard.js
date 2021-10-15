@@ -35,14 +35,6 @@ function MovieCard({
 		setMoviesLength(moviesLength - 1);
 	}
 
-	// to implement a new button with useToggleState from /hooks
-
-	// function viewedButton() {
-	// 	return (
-	// 		<Button className="MovieCard-Button" onClick={isViewed ? handleRemove : handleAdd} color={isViewed ? 'danger' : 'success'}>{isViewed ? 'Not Seen' : 'Viewed'}</Button>
-	// 	)
-	// }
-
 	function addButton() {
 		return (
 			<Button className="MovieCard-Button" onClick={handleAdd} color="success">
@@ -77,7 +69,6 @@ function MovieCard({
 		return (
 			<Card className="MovieCard">
 				<Link to={`/movie/${movie_id}`}>
-
 					<CardImg className="MovieCard-CardImg" src={poster} alt="Card image cap" />
 					<CardBody className="MovieCard-CardBody">
 						<CardTitle className="MovieCard-CardTitle">{title}</CardTitle>
@@ -88,12 +79,7 @@ function MovieCard({
 		);
 	}
 
-	return (
-		<>
-		{searched ? omdbIdResults() : moviePictureResults()}
-		</>
-
-	);
+	return <div>{searched ? omdbIdResults() : moviePictureResults()}</div>;
 }
 
 export default MovieCard;
