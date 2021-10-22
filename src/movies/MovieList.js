@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
@@ -11,7 +11,7 @@ import './MovieList.css';
 import './MovieCard.css';
 
 function MovieList() {
-	const { addMovie, removeMovie } = useContext(UserContext);
+	const { currentUser, addMovie, removeMovie } = useContext(UserContext);
 
 	const [ movies, setMovies ] = useState([]);
 	const [ numberOfMovies, setNumberOfMovies ] = useState(0);
@@ -20,7 +20,13 @@ function MovieList() {
 	const [ moviesPerPage ] = useState(10);
 	const [ moviesLength, setMoviesLength ] = useState(null);
 
-	// const history = useHistory();
+	const history = useHistory();
+
+	// const id = currentUser.id;
+
+	//this constant will need to change after implementing a user Search by email. But for now, we will try history.push and cannot pull from params for each MovieList render for that.
+
+	// const type = 'all';
 	const { id, type } = useParams();
 
 	//this useEffect generates a user's movieList and all subsequent records for pages within.

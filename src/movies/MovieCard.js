@@ -1,7 +1,9 @@
 import React from 'react';
 import './MovieCard.css';
 import { Link } from 'react-router-dom';
-import { Card, CardImg, CardBody, CardTitle, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle } from 'reactstrap';
+import loremIpsumPoster from '../images/loremipsumposter.jpg';
+
 // import useToggleState from '../hooks/useToggleState';
 
 function MovieCard({
@@ -16,49 +18,23 @@ function MovieCard({
 	setMoviesLength,
 	moviesLength
 }) {
-	// const [ isViewed, toggleIsViewed ] = useToggleState(false);
 	let searched = false;
 
 	if (!movie_id) {
 		searched = true;
 	}
 
-	// console.log(movie);
-	async function handleAdd(e) {
-		e.preventDefault();
-		await addMovie(user_id, imdb_id);
-	}
-
-	async function handleRemove(e) {
-		e.preventDefault();
-		await removeMovie(user_id, movie_id);
-		setMoviesLength(moviesLength - 1);
-	}
-
-	function addButton() {
-		return (
-			<Button className="MovieCard-Button" onClick={handleAdd} color="success">
-				Add
-			</Button>
-		);
-	}
-
-	function removeButton() {
-		return (
-			<Button className="MovieCard-Button" onClick={handleRemove} color="danger">
-				Remove
-			</Button>
-		);
+	if (poster === 'N/A') {
+		poster = loremIpsumPoster;
 	}
 
 	function omdbIdResults() {
 		return (
 			<Card className="MovieCard">
 				<Link to={`/movie/id/${imdb_id}`}>
-					<CardImg className="MovieCard-CardImg" src={poster} alt="Card image cap" />
+					<img className="MovieCard-CardImg" src={poster} alt="title" />
 					<CardBody className="MovieCard-CardBody">
 						<CardTitle className="MovieCard-CardTitle">{title}</CardTitle>
-						{viewed ? removeButton() : addButton()}
 					</CardBody>
 				</Link>
 			</Card>
@@ -69,10 +45,9 @@ function MovieCard({
 		return (
 			<Card className="MovieCard">
 				<Link to={`/movie/${movie_id}`}>
-					<CardImg className="MovieCard-CardImg" src={poster} alt="Card image cap" />
+					<img className="MovieCard-CardImg" src={poster} alt="title" />
 					<CardBody className="MovieCard-CardBody">
 						<CardTitle className="MovieCard-CardTitle">{title}</CardTitle>
-						{viewed ? removeButton() : addButton()}
 					</CardBody>
 				</Link>
 			</Card>

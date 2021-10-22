@@ -127,7 +127,8 @@ class MovieApi {
 
 	static async getMovieFromOmdb(movie_id, user_id) {
 		let res = await this.request(`movie/id/${movie_id}`, { user_id });
-		return res.data;
+
+		return res;
 	}
 }
 

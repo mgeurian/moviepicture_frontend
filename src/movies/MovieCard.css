@@ -2,3 +2,10 @@
   margin: 2em;
   padding: 1em;
 }
+
+
+
+.MovieCard img {
+  width: 20em;
+  height: 29rem;
+}

@@ -3,3 +3,16 @@
   margin: 0 auto;
   margin-top: 50px;
 }
+
+.MovieDetail img {
+  margin: 1em;
+  padding: 1em;
+  width: 20rem;
+  height: 29rem;
+
+}
+
+.MovieDetail-Button {
+  margin: 1em
+}
+

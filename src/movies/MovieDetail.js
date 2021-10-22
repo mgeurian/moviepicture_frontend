@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import MovieApi from '../api/Api';
 import UserContext from '../auth/UserContext';
-import { Button } from 'reactstrap';
+import useToggleState from '../hooks/useToggleState';
+import { Card, CardBody, CardTitle, Button } from 'reactstrap';
+import loremIpsumPoster from '../images/loremipsumposter.jpg';
+
 import './MovieDetail.css';
 
 function MovieDetail() {
 	const { currentUser, addMovie, removeMovie } = useContext(UserContext);
-
-	const { movie_id } = useParams();
+	const params = useParams();
+	const [ movieId, setMovieId ] = useState(params.movie_id);
 	const [ movie, setMovie ] = useState([]);
+	const [ isViewed, toggleIsViewed ] = useToggleState();
 	const user_id = currentUser.id;
-	let imdb_id;
+	const history = useHistory();
 
 	function isInt(value) {
 		var x = parseFloat(value);
@@ -20,21 +24,32 @@ function MovieDetail() {
 
 	async function handleAdd(e) {
 		e.preventDefault();
-		if (!isInt(movie_id)) {
-			let imdb_id = movie_id;
-			return imdb_id;
+		toggleIsViewed(true);
+		try {
+			let imdb_id;
+			if (!isInt(movieId)) {
+				imdb_id = movieId;
+			}
+			await addMovie(user_id, imdb_id);
+		} catch (err) {
+			console.log(err);
 		}
-		await addMovie(user_id, imdb_id);
+		history.push(`/user/${currentUser.id}/movies/all`);
 	}
 
 	async function handleRemove(e) {
 		e.preventDefault();
-		await removeMovie(user_id, movie_id);
+		try {
+			await removeMovie(user_id, movieId);
+		} catch (err) {
+			console.log(err);
+		}
+		history.push(`/user/${currentUser.id}/movies/all`);
 	}
 
 	function addButton() {
 		return (
-			<Button className="MovieCard-Button" onClick={handleAdd} color="success">
+			<Button className="MovieDetail-Button" onClick={handleAdd} color="success">
 				Add
 			</Button>
 		);
@@ -42,7 +57,7 @@ function MovieDetail() {
 
 	function removeButton() {
 		return (
-			<Button className="MovieCard-Button" onClick={handleRemove} color="danger">
+			<Button className="MovieDetail-Button" onClick={handleRemove} color="danger">
 				Remove
 			</Button>
 		);
@@ -54,34 +69,28 @@ function MovieDetail() {
 				try {
 					if (isInt(movie_id)) {
 						let movie = await MovieApi.getMovieById(movie_id);
-						console.log('from movieDetail: ', movie);
 						setMovie(movie);
 					} else {
 						let movie = await MovieApi.getMovieFromOmdb(movie_id, userId);
-						console.log(movie);
-						console.log(movie.Title);
-						setMovie(movie);
+						if (movie.data.Poster === 'N/A') {
+							movie.data.Poster = loremIpsumPoster;
+						}
+						if (movie.viewedResults.viewed) {
+							toggleIsViewed(movie.viewedResults.viewed);
+							setMovieId(movie.viewedResults.movie_id);
+						}
+
+						toggleIsViewed(movie.viewedResults.viewed);
+						setMovie(movie.data);
 					}
 				} catch (err) {
 					console.log(err);
 				}
 			}
-			getMoviesOnMount(movie_id, user_id);
+			getMoviesOnMount(movieId, user_id);
 		},
-		[ movie_id ]
+		[ movieId, user_id, setMovie ]
 	);
-
-	// async function getMovieFromOmdb(movieId) {
-	// 	let movie = await MovieApi.getMovieFromOmdb(movieId);
-	// 	setMovie(movie);
-	// 	console.log(movie);
-	// }
-
-	// async function getMovieById(movieId) {
-	// 	let movie = await MovieApi.getMovieById(movieId);
-	// 	setMovie(movie);
-	// 	console.log(movie);
-	// }
 
 	return (
 		<div className="MovieDetail col-md-8 offset-md-2">
@@ -93,8 +102,8 @@ function MovieDetail() {
 				<p>{movie.director || movie.Director}</p>
 				<p>{movie.imdb_rating || movie.imdbRating}</p>
 				<img src={movie.poster || movie.Poster} alt={movie.title || movie.Title} />
-				{/* {viewed ? removeButton() : addButton()} */}
 			</div>
+			{isViewed ? removeButton() : addButton()}
 		</div>
 	);
 }
