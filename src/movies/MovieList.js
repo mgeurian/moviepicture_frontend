@@ -1,33 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
 import MovieCard from './MovieCard';
 import Pagination from '../common/Pagination';
-import LoadingSpinner from '../common/LoadingSpinner';
+// import LoadingSpinner from '../common/LoadingSpinner';
 import UserContext from '../auth/UserContext';
 import './MovieList.css';
 import './MovieCard.css';
 
 function MovieList() {
-	const { currentUser, addMovie, removeMovie } = useContext(UserContext);
+	const { currentUser } = useContext(UserContext);
 
 	const [ movies, setMovies ] = useState([]);
 	const [ numberOfMovies, setNumberOfMovies ] = useState(0);
 	const [ currentPage, setCurrentPage ] = useState(1);
 	const [ currentFilter, setCurrentFilter ] = useState(0);
-	const [ moviesPerPage ] = useState(10);
+	const [ moviesPerPage, setMoviesPerPage ] = useState(10);
 	const [ moviesLength, setMoviesLength ] = useState(null);
 
 	const history = useHistory();
 
-	// const id = currentUser.id;
+	const id = currentUser.id;
 
 	//this constant will need to change after implementing a user Search by email. But for now, we will try history.push and cannot pull from params for each MovieList render for that.
 
 	// const type = 'all';
-	const { id, type } = useParams();
+	const { type } = useParams();
 
 	//this useEffect generates a user's movieList and all subsequent records for pages within.
 	useEffect(
@@ -53,13 +53,14 @@ function MovieList() {
 	);
 
 	async function search(name, currentPage) {
-		let res = await MovieApi.getMovieByTitle(name, currentPage);
-		let movies = res.Search;
-		let totalResults = res.totalResults;
-		setCurrentFilter(name);
-		setMovies(movies);
-		setNumberOfMovies(totalResults);
-		// history.push(`/movie/search?q=${name}`);
+		// let res = await MovieApi.getMovieByTitle(name, currentPage);
+		// let movies = res.Search;
+		// let totalResults = res.totalResults;
+		// setCurrentFilter(name);
+		// setMovies(movies);
+		// setNumberOfMovies(totalResults);
+		// history.push(`/movie/search`, { q: name });
+		history.push('/movie/search', { params: name });
 	}
 
 	const paginate = (pageNumber) => {
@@ -87,8 +88,6 @@ function MovieList() {
 								title={m.title || m.Title}
 								poster={m.poster || m.Poster}
 								viewed={m.viewed}
-								addMovie={addMovie}
-								removeMovie={removeMovie}
 								setMoviesLength={setMoviesLength}
 								moviesLength={moviesLength}
 							/>
@@ -100,6 +99,10 @@ function MovieList() {
 		);
 	}
 
+	if (!movies) {
+		return <Redirect to="/home" />;
+	}
+
 	function moviesNotAvailable() {
 		return (
 			<div>
@@ -107,8 +110,6 @@ function MovieList() {
 			</div>
 		);
 	}
-
-	if (!movies) return <LoadingSpinner />;
 
 	return (
 		<div>
