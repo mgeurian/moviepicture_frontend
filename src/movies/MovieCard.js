@@ -6,18 +6,7 @@ import loremIpsumPoster from '../images/loremipsumposter.jpg';
 
 // import useToggleState from '../hooks/useToggleState';
 
-function MovieCard({
-	user_id,
-	movie_id,
-	imdb_id,
-	title,
-	poster,
-	viewed,
-	addMovie,
-	removeMovie,
-	setMoviesLength,
-	moviesLength
-}) {
+function MovieCard({ movie_id, imdb_id, title, poster }) {
 	let searched = false;
 
 	if (!movie_id) {

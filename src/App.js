@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
 import Routes from './routes-nav/Routes';
 import NavBar from './routes-nav/NavBar';
@@ -84,14 +84,12 @@ function App() {
 	if (!infoLoaded) return <LoadingSpinner />;
 
 	return (
-		<BrowserRouter>
-			<UserContext.Provider value={{ currentUser, setCurrentUser, addMovie, removeMovie }}>
-				<div className="App">
-					<NavBar logout={logout} />
-					<Routes login={login} signup={signup} />
-				</div>
-			</UserContext.Provider>
-		</BrowserRouter>
+		<UserContext.Provider value={{ currentUser, setCurrentUser, addMovie, removeMovie }}>
+			<div className="App">
+				<NavBar logout={logout} />
+				<Routes login={login} signup={signup} />
+			</div>
+		</UserContext.Provider>
 	);
 }
 

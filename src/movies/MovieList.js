@@ -4,7 +4,7 @@ import { Row } from 'reactstrap';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
 import MovieCard from './MovieCard';
-import Pagination from '../common/Pagination';
+import PaginationComponent from '../common/Pagination';
 // import LoadingSpinner from '../common/LoadingSpinner';
 import UserContext from '../auth/UserContext';
 import './MovieList.css';
@@ -94,7 +94,7 @@ function MovieList() {
 						))}
 					</Row>
 				)}
-				<Pagination itemsPerPage={moviesPerPage} totalItems={numberOfMovies} paginate={paginate} />
+				<PaginationComponent itemsPerPage={moviesPerPage} totalItems={numberOfMovies} paginate={paginate} />
 			</div>
 		);
 	}

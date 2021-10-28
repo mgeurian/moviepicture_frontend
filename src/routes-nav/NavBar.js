@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './NavBar.css';
-import { Navbar, NavbarToggler, Nav, NavItem, NavbarBrand, Collapse } from 'reactstrap';
+import { Navbar, NavbarToggler, NavLink, Nav, NavbarBrand, Collapse } from 'reactstrap';
 import UserContext from '../auth/UserContext';
 
 function NavBar({ logout }) {
@@ -16,17 +16,15 @@ function NavBar({ logout }) {
 
 		return (
 			<Nav className="mr-auto navbar">
-				<NavItem className="mr-2">
-					<Link to={`/user/${id}/movies/all`}>My Movies</Link>
-				</NavItem>
-				<NavItem className="mr-2">
-					<Link to="/profile">Profile</Link>
-				</NavItem>
-				<NavItem className="mr-2">
-					<Link to="/" onClick={logout}>
-						Log out {currentUser.first_name}
-					</Link>
-				</NavItem>
+				<NavLink className="mr-4" href={`/user/${id}/movies/all`}>
+					My Movies
+				</NavLink>
+				<NavLink className="mr-4" href="/profile">
+					Profile
+				</NavLink>
+				<NavLink className="mr-4" href="/" onClick={logout}>
+					Log out {currentUser.first_name}
+				</NavLink>
 			</Nav>
 		);
 	}
@@ -34,12 +32,12 @@ function NavBar({ logout }) {
 	function loggedOutNavBar() {
 		return (
 			<Nav className="mr-auto navbar">
-				<NavItem className="mr-2">
-					<Link to="/login">Login</Link>
-				</NavItem>
-				<NavItem className="mr-2">
-					<Link to="/signup">Sign Up</Link>
-				</NavItem>
+				<NavLink className="mr-4" href="/login">
+					Login
+				</NavLink>
+				<NavLink className="mr-4" href="/signup">
+					Sign Up
+				</NavLink>
 			</Nav>
 		);
 	}
@@ -47,10 +45,8 @@ function NavBar({ logout }) {
 	return (
 		<div>
 			<Navbar color="light" light expand="md">
-				<NavbarBrand>
-					<Link exact to="/home">
-						MoviePicture
-					</Link>
+				<NavbarBrand href="/home" className="mr-4">
+					MoviePicture
 				</NavbarBrand>
 				<NavbarToggler onClick={toggle} />
 				<Collapse isOpen={isOpen} navbar>

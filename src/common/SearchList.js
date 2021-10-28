@@ -4,7 +4,7 @@ import { Row } from 'reactstrap';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
 import MovieCard from '../movies/MovieCard';
-import Pagination from './Pagination';
+import PaginationComponent from './Pagination';
 import UserContext from '../auth/UserContext';
 import '../movies/MovieList.css';
 import '../movies/MovieCard.css';
@@ -15,7 +15,6 @@ function SearchList() {
 
 	const location = useLocation();
 	const searchItem = location.state.params;
-	console.log("here's the name: ", searchItem);
 
 	const [ movies, setMovies ] = useState([]);
 	const [ numberOfMovies, setNumberOfMovies ] = useState(0);
@@ -32,7 +31,6 @@ function SearchList() {
 				try {
 					if (currentFilter) {
 						search(currentFilter, currentPage);
-						console.log('just checking if we are here');
 					} else {
 					}
 				} catch (err) {
@@ -48,7 +46,6 @@ function SearchList() {
 		let res = await MovieApi.getMovieByTitle(name, currentPage);
 		let movies = res.Search;
 		let totalResults = res.totalResults;
-		console.log('here are the movies returned from search function: ', movies);
 		setCurrentFilter(name);
 		setMovies(movies);
 		setNumberOfMovies(totalResults);
@@ -85,7 +82,7 @@ function SearchList() {
 						))}
 					</Row>
 				)}
-				<Pagination itemsPerPage={moviesPerPage} totalItems={numberOfMovies} paginate={paginate} />
+				<PaginationComponent itemsPerPage={moviesPerPage} totalItems={numberOfMovies} paginate={paginate} />
 			</div>
 		);
 	}
