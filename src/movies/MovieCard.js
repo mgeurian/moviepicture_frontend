@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import loremIpsumPoster from '../images/loremipsumposter.jpg';
 
-// import useToggleState from '../hooks/useToggleState';
-
 function MovieCard({ movie_id, imdb_id, title, poster }) {
 	let searched = false;
 

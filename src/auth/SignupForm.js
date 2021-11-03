@@ -6,7 +6,6 @@ import './SignupForm.css';
 function SignupForm({ signup }) {
 	let history = useHistory();
 	const { currentUser } = useContext(UserContext);
-	// let id = currentUser.id;
 
 	const INITIAL_STATE = {
 		first_name: '',
@@ -21,8 +20,7 @@ function SignupForm({ signup }) {
 
 	useEffect(
 		() => {
-			if (currentUser) {
-				// console.log();
+			if (currentUser?.id) {
 				history.push(`/user/${currentUser.id}/movies/all`);
 			}
 		},

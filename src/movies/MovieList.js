@@ -5,7 +5,6 @@ import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
 import MovieCard from './MovieCard';
 import PaginationComponent from '../common/Pagination';
-// import LoadingSpinner from '../common/LoadingSpinner';
 import UserContext from '../auth/UserContext';
 import './MovieList.css';
 import './MovieCard.css';
@@ -52,14 +51,7 @@ function MovieList() {
 		[ id, currentPage, type, currentFilter, moviesLength ]
 	);
 
-	async function search(name, currentPage) {
-		// let res = await MovieApi.getMovieByTitle(name, currentPage);
-		// let movies = res.Search;
-		// let totalResults = res.totalResults;
-		// setCurrentFilter(name);
-		// setMovies(movies);
-		// setNumberOfMovies(totalResults);
-		// history.push(`/movie/search`, { q: name });
+	function search(name, currentPage) {
 		history.push('/movie/search', { params: name });
 	}
 

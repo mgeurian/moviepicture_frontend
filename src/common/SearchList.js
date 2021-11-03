@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 import { Row } from 'reactstrap';
 import MovieApi from '../api/Api';
 import SearchForm from '../common/SearchForm';
@@ -14,16 +14,13 @@ function SearchList() {
 	const id = currentUser.id;
 
 	const location = useLocation();
-	const searchItem = location.state.params;
 
 	const [ movies, setMovies ] = useState([]);
 	const [ numberOfMovies, setNumberOfMovies ] = useState(0);
 	const [ currentPage, setCurrentPage ] = useState();
 	const [ currentFilter, setCurrentFilter ] = useState(location.state.params);
-	const [ moviesPerPage, setMoviesPerPage ] = useState(10);
+	const [ moviesPerPage ] = useState(10);
 	const [ moviesLength, setMoviesLength ] = useState(null);
-
-	// const history = useHistory();
 
 	useEffect(
 		() => {

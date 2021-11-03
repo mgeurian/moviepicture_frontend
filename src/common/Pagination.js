@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 const PaginationComponent = ({ itemsPerPage, totalItems, paginate }) => {
 	const pageNumbers = [];

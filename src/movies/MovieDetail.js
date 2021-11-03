@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import MovieApi from '../api/Api';
 import UserContext from '../auth/UserContext';
 import useToggleState from '../hooks/useToggleState';
-import { Card, CardBody, CardTitle, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import loremIpsumPoster from '../images/loremipsumposter.jpg';
 
 import './MovieDetail.css';
