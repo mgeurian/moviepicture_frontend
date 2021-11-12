@@ -91,7 +91,7 @@ class MovieApi {
 	/** update user_movie by user_id and movie_id */
 
 	static async patchUserMovieByMovieId(id, movie_id) {
-		let res = await this.request(`user/p${id}/movie/${movie_id}/update`, { movie_id }, 'patch');
+		let res = await this.request(`user/${id}/movie/${movie_id}/update`, { movie_id }, 'patch');
 		return res.data;
 	}
 
