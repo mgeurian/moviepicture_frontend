@@ -82,6 +82,7 @@ class MovieApi {
 	}
 
 	/** get user_movie by user_id and movie_id */
+	/** not currently in use */
 
 	static async getUserMovieById(id, movie_id) {
 		let res = await this.request(`user/${id}/movie/${movie_id}`, { movie_id });
@@ -89,6 +90,7 @@ class MovieApi {
 	}
 
 	/** update user_movie by user_id and movie_id */
+	/** not currently in use */
 
 	static async patchUserMovieByMovieId(id, movie_id) {
 		let res = await this.request(`user/${id}/movie/${movie_id}/update`, { movie_id }, 'patch');
@@ -103,6 +105,7 @@ class MovieApi {
 	}
 
 	/** static async get User by email */
+	/** not currently in use */
 
 	static async getPublicUserByEmail(userEmail) {
 		let res = await this.request(`search/${userEmail}`);
