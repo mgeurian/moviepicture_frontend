@@ -36,7 +36,6 @@ function MovieList() {
 					if (!currentFilter) {
 						let res = await MovieApi.getUserMovies(user_id, pageNum, viewType);
 						setMovies(res.Search);
-						console.log(res.Search);
 						setNumberOfMovies(res.totalResults.count);
 						setMoviesLength(res.Search.length);
 					} else {
