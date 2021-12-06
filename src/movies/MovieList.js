@@ -61,6 +61,9 @@ function MovieList() {
 	function moviesAvailable() {
 		return (
 			<div className="MovieList mt-5">
+				<h3 className="MovieList-NumberOfMovies">
+					You have seen <strong>{numberOfMovies}</strong> movies.
+				</h3>
 				{movies && (
 					<Row
 						className="MovieList-Row d-flex justify-content-center"

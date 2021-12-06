@@ -35,7 +35,6 @@ function SearchList() {
 				}
 			}
 			getMoviesOnMount(id, currentPage);
-			console.log(movies);
 		},
 		[ currentFilter, currentPage ]
 	);
