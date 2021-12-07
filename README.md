@@ -1,70 +1,127 @@
-# Getting Started with Create React App
+# MoviePicture
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+- MoviePicture is place for users to create and track a list of movies the user has seen.
+- This is a full-stack application written with Express, Postgresql, React, and Bootstrap for styling.
+- This application was created as a Capstone Project for the Springboard Software Engineering Program.
 
-In the project directory, you can run:
 
-### `yarn start`
+## Current Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Users can
+    - create a profile/account.
+    - update their profile information.
+    - search for movies to add to their list.
+    - add movies to their list.
+    - remove movies from their list.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Roadmap
 
-### `yarn test`
+- Users will be able to 
+    - view another users's movie list. 
+    - add a list of tv series.
+    - remove/delete their profile/account.
+    - view movies they want to see.
+    - view a reduced list of multiple users lists to view movies ALL grouped users have/haven't seen.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+- Additional Future Features:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - There are many possible features to add. 
+    - There are many UI/UX design features that can be improved or added.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Walkthrough
 
-### `yarn eject`
+1. To start, signup or Login for an account.
+1. The navigation bar has 3 links. 
+  1. My Movies will take you directly to your list of existing movies. 
+  1. Profile will take you to your profile page. 
+    1. The Profile page allow you to edit your first name, last name, or email.
+  1. The Log out is pretty self explanatory. However, should you wish to log out of your account, click this link.
+1. Enter a movie title for which to search.
+    1. The screen will populate with a list of movies.
+    1. To Add a movie to your list:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+        1. Click on a movie. 
+            1. Click on the 'green' ADD button.
+                1. after adding a movie, the user will be re-directed to their list of movies.
+    1. To Remove a movie from your list:
+        1. Click on a movie.
+            1. Click on the 'red' REMOVE button.
+1. To finish, click on "Log out (username)" on the navbar at the top of your screen.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Working with this codebase
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### The Database
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### The Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The backend was created using Express and Postgresql. This application utilizes the Open Movie Database API. If you would like to play around with this appliation on a local machine, you will need to sign up for a free API key with your email.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### The Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The frontend was created with Create-React-App. React-bootstrap was used to for styling most components.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Installation
 
-### Deployment
+In the project directory,
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Backend
 
-### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+cd moviepicture-backend
+npm install
+```
+
+
+#### Frontend
+
+```
+cd moviepicture-frontend
+npm install
+```
+
+
+### Testing
+
+#### Backend
+
+```
+cd moviepicture-backend
+npm test
+```
+
+#### Frontend
+
+```
+cd moviepicture-frontend
+npm test
+```
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+MIT License
+
+Copyright (c) [2021] [Matt C Geurian]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
