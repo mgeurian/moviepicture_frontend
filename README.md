@@ -6,6 +6,13 @@
 - This is a full-stack application written with Express, Postgresql, React, and Bootstrap for styling.
 - This application was created as a Capstone Project for the Springboard Software Engineering Program.
 
+A live version of this project can be found here:  https://moviepicture.surge.sh/
+
+The repository for the frontend can be found here:  https://github.com/mgeurian/moviepicture_frontend
+
+The repository for the backend can be found here:  https://github.com/mgeurian/moviepicture_backend
+
+
 
 ## Current Features
 
